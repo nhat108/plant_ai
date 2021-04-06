@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   cached_network_image: ^2.5.1
-  tflite: ^1.0.4
+  tflite: ^1.1.1
   image_picker: ^0.6.7+22
   image: ^2.1.19
   equatable: ^1.2.6
@@ -33,6 +33,7 @@ dependencies:
   path_provider: ^1.6.28
   flutter_svg: any
   dio: ^3.0.10
+  fluttertoast: ^7.1.8
 
 
 

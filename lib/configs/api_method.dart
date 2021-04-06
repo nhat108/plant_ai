@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -18,46 +17,21 @@ class ApiClient {
     headers,
     isUrl,
     isTranslate = false,
-    versionAPI = 'v1.0',
+    versionAPI = 'v1',
     Duration cacheDuration,
     bool isForceRefresh = false,
     String customDomain,
     String primaryKey,
   }) async {
     try {
-      final _baseUrl = '${customDomain ?? Constants.BASE_URL}/api/$versionAPI';
-      final hasToken = isAuth != null ? isAuth : true;
-      final hasUserOtherUrl = isUrl ?? false;
-      Map _headers = {
+      final _baseUrl = '${Constants.BASE_URL}/api/$versionAPI';
+
+      Map header = {
         // 'Content-Type': 'application/json',
         'Connection': "keep-alive"
       };
-      // Map _headers = {};
 
-      // if (hasToken) {
-      //   if (await LocalStorage().hasExpireToken())
-      //     await LocalStorage().refreshToken();
-      //   final _token = await LocalStorage().getToken();
-      //   _headers['Authorization'] = 'Bearer $_token';
-      // }
-      var combinedMap = _headers;
-      if (_headers != null && headers != null) {
-        var mapList = [_headers, headers];
-        _headers.addAll(headers);
-        combinedMap = mapList.reduce((map1, map2) => map1..addAll(map2));
-      }
-      Map<String, String> header = HashMap.from(combinedMap);
-      String _url;
-      // if (hasUserOtherUrl) {
-      //   _url = url;
-      // } else {
-      //   _url = _baseUrl + url;
-      //   String localLanguageCode = await LocalStorage().getCurrentLanguage();
-      //   if (isTranslate) {
-      //     _url = _url +
-      //         '${_url.contains('?') ? '&' : '?'}lang=${localLanguageCode != 'none' ? localLanguageCode : 'en'}';
-      //   }
-      // }
+      String _url = _baseUrl + url;
 
       params = {
         'token': Constants.API_KEY,

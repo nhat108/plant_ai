@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/assets.dart';
 import 'package:flutter/material.dart';
 

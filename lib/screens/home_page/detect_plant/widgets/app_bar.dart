@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flower/configs/app_colors.dart';
-import 'package:flower/configs/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class DetectPlantAppBar extends StatelessWidget {

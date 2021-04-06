@@ -1,13 +1,9 @@
-import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:camerawesome/camerapreview.dart';
 import 'package:camerawesome/camerawesome_plugin.dart';
 import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_routes.dart';
-import 'package:flower/models/recognition.dart';
-import 'package:flower/screens/home_page/detect_plant/detect_plant_page.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -31,9 +27,6 @@ class _CameraDetectionPageState extends State<CameraDetectionPage>
 
   /// use this to call a take picture
   PictureController _pictureController = new PictureController();
-  Stream<Uint8List> previewStream;
-  List<Recogition> _listRecogitions = [];
-  bool loadMoreDone = false;
 
   @override
   void dispose() {

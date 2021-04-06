@@ -7,10 +7,10 @@ class Recogition extends Equatable {
 
   Recogition({this.confidenceInClass, this.detectedClass, this.rect});
 
-  factory Recogition.fromJson(Map<String, dynamic> json) {
+  factory Recogition.fromJson(dynamic json) {
     return Recogition(
-      confidenceInClass: json['confidenceInClass'],
-      detectedClass: json['detectedClass'],
+      confidenceInClass: json['confidence'],
+      detectedClass: json['label'],
       rect: json['rect'],
     );
   }

@@ -1,4 +1,7 @@
+import 'package:flower/blocs/detect_plant/detect_plant_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'widgets/app_bar.dart';
 import 'widgets/list_plant_detected.dart';
@@ -12,23 +15,47 @@ class DetectPlantPage extends StatefulWidget {
 }
 
 class _DetectPlantPageState extends State<DetectPlantPage> {
+  final DetectPlantBloc _detectPlantBloc = DetectPlantBloc();
+  @override
+  void dispose() {
+    _detectPlantBloc.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {},
-      ),
-      body: CustomScrollView(
-        slivers: [
-          DetectPlantAppBar(imagePath: widget.filePath),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                ListPlantDetected(),
-              ],
-            ),
-          )
-        ],
+    return BlocListener<DetectPlantBloc, DetectPlantState>(
+      cubit: _detectPlantBloc,
+      listener: (_, state) {
+        if (state.detectPlantError.isNotEmpty) {
+          Fluttertoast.showToast(msg: state.detectPlantError);
+        }
+        if (state.searchPlantError.isNotEmpty) {
+          Fluttertoast.showToast(msg: state.searchPlantError);
+        }
+      },
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            _detectPlantBloc.add(DetectPlant(imagePath: widget.filePath));
+          },
+        ),
+        body: CustomScrollView(
+          slivers: [
+            DetectPlantAppBar(imagePath: widget.filePath),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  BlocProvider(
+                      create: (_) => _detectPlantBloc,
+                      child: ListPlantDetected(
+                        imagePath: widget.filePath,
+                      )),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

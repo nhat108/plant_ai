@@ -47,17 +47,20 @@ class DetectPlantBloc extends Bloc<DetectPlantEvent, DetectPlantState> {
     if (event is DetectPlant) {
       try {
         yield state.copyWith(detectPlantLoading: true, detectPlantError: '');
-        var results = await Tflite.runModelOnImage(
+        List<dynamic> results = await Tflite.runModelOnImage(
           path: event.imagePath,
           threshold: 0.5,
           imageMean: 127.5,
           imageStd: 127.5,
           numResults: 2,
         );
+        print(results);
         List<Recogition> listRecogitions =
             results.map((e) => Recogition.fromJson(e)).toList();
+
         if (listRecogitions.isNotEmpty) {
           var recogition = listRecogitions.first;
+
           var name = Constants.MAP_PLANT_TEXT[recogition.detectedClass];
           add(SearchPlant(
             query: name,
