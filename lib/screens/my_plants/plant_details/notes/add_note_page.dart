@@ -1,6 +1,5 @@
 import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_styles.dart';
-import 'package:flower/configs/assets.dart';
 import 'package:flower/widgets/background_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

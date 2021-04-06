@@ -1,7 +1,12 @@
 import 'package:flower/configs/app_colors.dart';
+import 'package:flower/configs/app_routes.dart';
 import 'package:flower/configs/app_styles.dart';
+import 'package:flower/screens/home_page/ai_detection/camera_dectection_page.dart';
 import 'package:flower/widgets/cache_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'ai_detection/choose_related_type.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,6 +14,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -66,16 +76,26 @@ class _HomePageState extends State<HomePage> {
             children: [
               Column(
                 children: [
-                  Container(
-                    width: 65,
-                    height: 65,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.primaryColor,
-                    ),
-                    child: Icon(
-                      Icons.camera,
-                      color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      AppRoutes.push(
+                          context,
+                          CameraDetectionPage(
+                              // cameras: cameras,
+                              ),
+                          isFullScreen: false);
+                    },
+                    child: Container(
+                      width: 65,
+                      height: 65,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.primaryColor,
+                      ),
+                      child: Icon(
+                        Icons.camera,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -93,16 +113,27 @@ class _HomePageState extends State<HomePage> {
               ),
               Column(
                 children: [
-                  Container(
-                    width: 65,
-                    height: 65,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.primaryColor,
-                    ),
-                    child: Icon(
-                      Icons.image,
-                      color: Colors.white,
+                  GestureDetector(
+                    onTap: () async {
+                      var image = await ImagePicker()
+                          .getImage(source: ImageSource.gallery);
+                      AppRoutes.push(
+                          context,
+                          ChooseRelatedTypePage(
+                            imagePath: image.path,
+                          ));
+                    },
+                    child: Container(
+                      width: 65,
+                      height: 65,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.primaryColor,
+                      ),
+                      child: Icon(
+                        Icons.image,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   const SizedBox(
