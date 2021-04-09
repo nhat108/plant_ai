@@ -2,8 +2,6 @@ import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_routes.dart';
 import 'package:flower/configs/app_styles.dart';
 import 'package:flower/screens/home_page/ai_detection/camera_dectection_page.dart';
-import 'package:flower/screens/home_page/plant_details/plant_details_page.dart';
-import 'package:flower/widgets/cache_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -24,11 +22,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CacheImageWidget(
-          imageUrl:
-              'https://caodangyduoctphcm.com.vn/wp-content/uploads/2018/02/dai-hoc-can-tho.jpg',
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+        Container(
+          color: AppColors.primaryColor,
         ),
         Positioned(
           left: 20,
@@ -41,13 +36,12 @@ class _HomePageState extends State<HomePage> {
                   "Plant",
                   style: AppStyles.black(
                     size: 40,
-                    color: AppColors.lightColor,
+                    color: Colors.white,
                   ),
                 ),
                 Text(
                   "Identication",
-                  style:
-                      AppStyles.medium(size: 30, color: AppColors.lightColor),
+                  style: AppStyles.medium(size: 30, color: Colors.white),
                 )
               ],
             ),
@@ -116,19 +110,19 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   GestureDetector(
                     onTap: () async {
-                      AppRoutes.push(
-                          context,
-                          PlantDetailsById(
-                            id: '118155',
-                            imagePath: '',
-                          ));
-                      // var image = await ImagePicker()
-                      //     .getImage(source: ImageSource.gallery);
                       // AppRoutes.push(
                       //     context,
-                      //     ChooseRelatedTypePage(
-                      //       imagePath: image.path,
+                      //     PlantDetailsById(
+                      //       id: '118155',
+                      //       imagePath: '',
                       //     ));
+                      var image = await ImagePicker()
+                          .getImage(source: ImageSource.gallery);
+                      AppRoutes.push(
+                          context,
+                          ChooseRelatedTypePage(
+                            imagePath: image.path,
+                          ));
                     },
                     child: Container(
                       width: 65,

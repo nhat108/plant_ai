@@ -1,8 +1,10 @@
 import 'package:flower/configs/app_colors.dart';
+import 'package:flower/configs/assets.dart';
 import 'package:flower/screens/favourite/favourite_page.dart';
 import 'package:flower/screens/home_page/home_page.dart';
 import 'package:flower/screens/profile/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'my_plants/my_plant_page.dart';
 
@@ -53,22 +55,49 @@ class MyBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       selectedItemColor: AppColors.primaryColor,
-      unselectedItemColor: AppColors.lightColor,
+      unselectedItemColor: Colors.grey[400],
       currentIndex: currentIndex,
       showUnselectedLabels: true,
       type: BottomNavigationBarType.fixed,
       onTap: onChanged,
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: SvgPicture.asset(
+            AppAssets.homeIcon,
+            width: 18,
+            color: Colors.grey[400],
+          ),
+          activeIcon: SvgPicture.asset(
+            AppAssets.homeIcon,
+            width: 18,
+            color: AppColors.primaryColor,
+          ),
           label: "Home",
         ),
         BottomNavigationBarItem(
-            icon: Icon(
-              Icons.star,
+            icon: SvgPicture.asset(
+              AppAssets.leafIcon3,
+              width: 18,
+              color: Colors.grey[400],
+            ),
+            activeIcon: SvgPicture.asset(
+              AppAssets.leafIcon3,
+              width: 18,
+              color: AppColors.primaryColor,
             ),
             label: "My Plant"),
-        BottomNavigationBarItem(icon: Icon(Icons.help), label: "Help"),
+        BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              AppAssets.helpIcon,
+              width: 18,
+              color: Colors.grey[400],
+            ),
+            activeIcon: SvgPicture.asset(
+              AppAssets.helpIcon,
+              width: 18,
+              color: AppColors.primaryColor,
+            ),
+            label: "Help"),
         BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flower/blocs/detect_plant/detect_plant_bloc.dart';
+import 'package:flower/blocs/firestore/firestore_bloc_bloc.dart';
 import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_routes.dart';
 import 'package:flower/configs/app_styles.dart';
@@ -57,19 +58,28 @@ class ListPlantDetected extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${plant.commonName}",
+                            plant.commonName ?? "Unknow",
                             style: AppStyles.regular(size: 18),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: AppColors.primaryColor),
-                            ),
-                            padding: EdgeInsets.all(5),
-                            child: Icon(
-                              Icons.save_alt,
-                              color: AppColors.primaryColor,
-                              size: 18,
+                          GestureDetector(
+                            onTap: () {
+                              BlocProvider.of<FirestoreBlocBloc>(context).add(
+                                  SavePlant(
+                                      id: plant.id.toString(),
+                                      body: plant.toMap()));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border:
+                                    Border.all(color: AppColors.primaryColor),
+                              ),
+                              padding: EdgeInsets.all(5),
+                              child: Icon(
+                                Icons.save_alt,
+                                color: AppColors.primaryColor,
+                                size: 18,
+                              ),
                             ),
                           ),
                         ],
@@ -132,7 +142,7 @@ class ListPlantDetected extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
-                                "${plant.synonyms.reduce((value, element) => value + ', ' + element)}",
+                                "${plant.synonyms.isEmpty ? '' : plant.synonyms.reduce((value, element) => value + ', ' + element)}",
                                 style: AppStyles.regular(),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -160,7 +170,9 @@ class ListPlantDetected extends StatelessWidget {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: CacheImageWidget(
-                              imageUrl: plant.imageUrl, width: 60, height: 60),
+                              imageUrl: '${plant.imageUrl}',
+                              width: 60,
+                              height: 60),
                         ),
                       )
                     ],

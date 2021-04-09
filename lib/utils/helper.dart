@@ -3,8 +3,13 @@ import 'dart:typed_data';
 import 'package:image/image.dart' as img;
 import 'package:meta/meta.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:intl/intl.dart';
 
 class Helper {
+  static String formatDateTime(String value, String format) {
+    return DateFormat(format).format(DateTime.parse(value));
+  }
+
   static List<int> resizeImage(
       {@required List<int> data, int width = 300, int height = 300}) {
     try {

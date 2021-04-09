@@ -3,6 +3,7 @@ import 'package:flower/configs/app_colors.dart';
 import 'package:flower/screens/home_page/plant_details/widgets/plant_info.dart';
 import 'package:flower/widgets/custom_shape.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widgets/image_plant.dart';
 
@@ -41,34 +42,42 @@ class _PlantDetailsByIdState extends State<PlantDetailsById> {
           },
         ),
         centerTitle: true,
-        title: Text("Name"),
+        title: BlocBuilder<PlantDetailsBloc, PlantDetailsState>(
+          cubit: _plantDetailsBloc,
+          builder: (context, state) {
+            return Text("${state.plantDetails?.commonName ?? ''}");
+          },
+        ),
         actions: [
           IconButton(icon: Icon(Icons.favorite_border), onPressed: () {})
         ],
       ),
-      body: Stack(
-        children: [
-          ClipPath(
-            clipper:
-                CustomShape(), // this is my own class which extendsCustomClipper
-            child: Container(
-              height: 150,
-              color: AppColors.primaryColor,
-            ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              child: Column(
-                children: [
-                  ImagePlant(
-                    imagePath: widget.imagePath,
-                  ),
-                  PlantInfo(),
-                ],
+      body: BlocProvider.value(
+        value: _plantDetailsBloc,
+        child: Stack(
+          children: [
+            ClipPath(
+              clipper:
+                  CustomShape(), // this is my own class which extendsCustomClipper
+              child: Container(
+                height: 150,
+                color: AppColors.primaryColor,
               ),
             ),
-          )
-        ],
+            SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  children: [
+                    ImagePlant(
+                      imagePath: widget.imagePath,
+                    ),
+                    PlantInfo(),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

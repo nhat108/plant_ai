@@ -1,9 +1,15 @@
 import 'package:flower/configs/app_colors.dart';
+import 'package:flower/configs/app_routes.dart';
 import 'package:flower/configs/app_styles.dart';
+import 'package:flower/models/plant.dart';
+import 'package:flower/screens/home_page/plant_details/plant_details_page.dart';
 import 'package:flower/widgets/cache_image_widget.dart';
 import 'package:flutter/material.dart';
 
 class PlantDetailsAppBar extends StatelessWidget {
+  final Plant plant;
+
+  const PlantDetailsAppBar({Key key, @required this.plant}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -14,7 +20,7 @@ class PlantDetailsAppBar extends StatelessWidget {
       // floating: _floating,
       expandedHeight: 200.0,
       flexibleSpace: FlexibleSpaceBar(
-        title: Text('Acer plantanoides'),
+        title: Text('${plant.commonName}'),
         background: Container(
           height: 200,
           color: Colors.white,
@@ -27,11 +33,9 @@ class PlantDetailsAppBar extends StatelessWidget {
                     bottomRight: Radius.circular(30),
                   ),
                   child: CacheImageWidget(
-                    width: double.infinity,
-                    height: 200,
-                    imageUrl:
-                        'https://cdn.plant-for-the-planet.org/media/images/app/bg_layer.jpg',
-                  ),
+                      width: double.infinity,
+                      height: 200,
+                      imageUrl: '${plant.imageUrl}'),
                 ),
               ),
               Positioned(
@@ -51,9 +55,11 @@ class PlantDetailsAppBar extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(),
+                      Container(
+                        width: 20,
+                      ),
                       Text(
-                        "Acer plantanoides",
+                        "${plant.commonName}",
                         style: AppStyles.medium(size: 20),
                       ),
                       IconButton(
@@ -61,7 +67,13 @@ class PlantDetailsAppBar extends StatelessWidget {
                             Icons.info,
                             color: AppColors.primaryColor,
                           ),
-                          onPressed: () {})
+                          onPressed: () {
+                            AppRoutes.push(
+                                context,
+                                PlantDetailsById(
+                                    id: plant.id.toString(),
+                                    imagePath: plant.imageUrl));
+                          })
                     ],
                   ),
                 ),

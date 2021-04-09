@@ -20,7 +20,7 @@ class PlantDetailsBloc extends Bloc<PlantDetailsEvent, PlantDetailsState> {
       try {
         yield state.copyWith(
           getPlantDetailsError: '',
-          getPlantDetailsLoading: false,
+          getPlantDetailsLoading: true,
         );
         final model = await TrefleApiClient().getPlantDetails(event.id);
         yield state.copyWith(
@@ -28,6 +28,7 @@ class PlantDetailsBloc extends Bloc<PlantDetailsEvent, PlantDetailsState> {
           plantDetails: model,
         );
       } catch (e) {
+        print(e);
         yield state.copyWith(
           getPlantDetailsError: e.toString(),
           getPlantDetailsLoading: false,

@@ -17,6 +17,12 @@ class DetectPlantPage extends StatefulWidget {
 class _DetectPlantPageState extends State<DetectPlantPage> {
   final DetectPlantBloc _detectPlantBloc = DetectPlantBloc();
   @override
+  void initState() {
+    _detectPlantBloc.add(DetectPlant(imagePath: widget.filePath));
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _detectPlantBloc.close();
     super.dispose();
@@ -35,11 +41,6 @@ class _DetectPlantPageState extends State<DetectPlantPage> {
         }
       },
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            _detectPlantBloc.add(DetectPlant(imagePath: widget.filePath));
-          },
-        ),
         body: CustomScrollView(
           slivers: [
             DetectPlantAppBar(imagePath: widget.filePath),

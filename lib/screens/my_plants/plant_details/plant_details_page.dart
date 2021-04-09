@@ -1,11 +1,15 @@
 import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_styles.dart';
+import 'package:flower/models/plant.dart';
 import 'package:flower/screens/my_plants/plant_details/app_bar.dart';
 import 'package:flower/screens/my_plants/plant_details/notes/list_notes_page.dart';
 import 'package:flower/screens/my_plants/plant_details/reminder/list_reminder_page.dart';
 import 'package:flutter/material.dart';
 
 class PlantDetailsPage extends StatefulWidget {
+  final Plant plant;
+
+  const PlantDetailsPage({Key key, @required this.plant}) : super(key: key);
   @override
   _PlantDetailsPageState createState() => _PlantDetailsPageState();
 }
@@ -19,7 +23,9 @@ class _PlantDetailsPageState extends State<PlantDetailsPage> {
         backgroundColor: Colors.white,
         body: CustomScrollView(
           slivers: [
-            PlantDetailsAppBar(),
+            PlantDetailsAppBar(
+              plant: widget.plant,
+            ),
             SliverList(
               delegate: SliverChildListDelegate(
                 [
@@ -73,8 +79,12 @@ class _PlantDetailsPageState extends State<PlantDetailsPage> {
             new SliverFillRemaining(
               child: TabBarView(
                 children: <Widget>[
-                  ListReminderPage(),
-                  ListNotesPage(),
+                  ListReminderPage(
+                    plant: widget.plant,
+                  ),
+                  ListNotesPage(
+                    plant: widget.plant,
+                  ),
                 ],
               ),
             ),

@@ -32,10 +32,16 @@ class ApiClient {
       };
 
       String _url = _baseUrl + url;
+      if (params == null) {
+        params = {
+          'token': Constants.API_KEY,
+        };
+      } else {
+        params = {
+          'token': Constants.API_KEY,
+        }..addAll(params);
+      }
 
-      params = {
-        'token': Constants.API_KEY,
-      }..addAll(params);
       if (method == Method.post) {
         return await dio.post(_url,
             data: body,
