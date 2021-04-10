@@ -85,7 +85,7 @@ class MyBottomNavigationBar extends StatelessWidget {
               width: 18,
               color: AppColors.primaryColor,
             ),
-            label: "My Plant"),
+            label: "My Plants"),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               AppAssets.helpIcon,

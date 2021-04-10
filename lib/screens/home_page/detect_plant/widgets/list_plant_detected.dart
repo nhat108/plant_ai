@@ -42,6 +42,9 @@ class ListPlantDetected extends StatelessWidget {
               var plant = state.listPlants[index];
               return GestureDetector(
                 onTap: () {
+                  BlocProvider.of<FirestoreBlocBloc>(context).add(
+                      AddToRecentSnap(
+                          body: plant.toMap(), plantId: plant.id.toString()));
                   AppRoutes.push(
                       context,
                       PlantDetailsById(

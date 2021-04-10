@@ -1,3 +1,4 @@
+import 'package:flower/blocs/firestore/firestore_bloc_bloc.dart';
 import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_routes.dart';
 import 'package:flower/configs/app_styles.dart';
@@ -5,6 +6,7 @@ import 'package:flower/models/plant.dart';
 import 'package:flower/screens/home_page/plant_details/plant_details_page.dart';
 import 'package:flower/widgets/cache_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlantDetailsAppBar extends StatelessWidget {
   final Plant plant;
@@ -18,6 +20,16 @@ class PlantDetailsAppBar extends StatelessWidget {
       snap: false,
 
       // floating: _floating,
+      actions: [
+        IconButton(
+            icon: Icon(
+              Icons.delete,
+            ),
+            onPressed: () {
+              BlocProvider.of<FirestoreBlocBloc>(context)
+                  .add(DeletePlant(plantId: plant.id.toString()));
+            })
+      ],
       expandedHeight: 200.0,
       flexibleSpace: FlexibleSpaceBar(
         title: Text('${plant.commonName}'),

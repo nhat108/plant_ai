@@ -49,13 +49,13 @@ class _MyAppState extends State<MyApp> {
           inputDecorationTheme: InputDecorationTheme(
             focusColor: AppColors.primaryColor,
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
                 color: AppColors.primaryColor,
               ),
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
                 color: AppColors.primaryColor,
               ),

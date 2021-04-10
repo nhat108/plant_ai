@@ -10,6 +10,13 @@ class FirestoreBlocState extends Equatable {
   final bool saveReminderLoading;
   final String saveReminderError;
   final bool saveReminderSuccess;
+  final bool removeFavouriteLoading;
+  final String removeFavouriteError;
+
+  final bool deleteNoteSuccess;
+
+  final bool deletePlantLoading;
+  final bool deletePlantSuccess;
 
   FirestoreBlocState({
     this.savePlantError,
@@ -21,6 +28,11 @@ class FirestoreBlocState extends Equatable {
     this.saveReminderError,
     this.saveReminderLoading,
     this.saveReminderSuccess,
+    this.removeFavouriteError,
+    this.removeFavouriteLoading,
+    this.deleteNoteSuccess,
+    this.deletePlantLoading,
+    this.deletePlantSuccess,
   });
 
   @override
@@ -34,6 +46,11 @@ class FirestoreBlocState extends Equatable {
         this.saveReminderError,
         this.saveReminderLoading,
         this.saveReminderSuccess,
+        this.removeFavouriteError,
+        this.removeFavouriteLoading,
+        this.deleteNoteSuccess,
+        this.deletePlantLoading,
+        this.deletePlantSuccess,
       ];
   factory FirestoreBlocState.empty() {
     return FirestoreBlocState(
@@ -45,7 +62,12 @@ class FirestoreBlocState extends Equatable {
         savePlantSuccess: false,
         saveReminderError: '',
         saveReminderLoading: false,
-        saveReminderSuccess: false);
+        saveReminderSuccess: false,
+        removeFavouriteError: '',
+        removeFavouriteLoading: false,
+        deleteNoteSuccess: false,
+        deletePlantLoading: false,
+        deletePlantSuccess: false);
   }
 
   FirestoreBlocState copyWith({
@@ -58,8 +80,19 @@ class FirestoreBlocState extends Equatable {
     final bool saveReminderLoading,
     final String saveReminderError,
     final bool saveReminderSuccess,
+    final bool removeFavouriteLoading,
+    final String removeFavouriteError,
+    final bool deleteNoteSuccess,
+    final bool deletePlantLoading,
+    final bool deletePlantSuccess,
   }) {
     return FirestoreBlocState(
+      deletePlantSuccess: deletePlantSuccess ?? this.deletePlantSuccess,
+      deletePlantLoading: deletePlantLoading ?? this.deletePlantLoading,
+      deleteNoteSuccess: deleteNoteSuccess ?? this.deleteNoteSuccess,
+      removeFavouriteError: removeFavouriteError ?? this.removeFavouriteError,
+      removeFavouriteLoading:
+          removeFavouriteLoading ?? this.removeFavouriteLoading,
       saveReminderError: saveReminderError ?? this.saveReminderError,
       saveReminderLoading: saveReminderLoading ?? this.saveReminderLoading,
       saveReminderSuccess: saveReminderSuccess ?? this.saveReminderSuccess,

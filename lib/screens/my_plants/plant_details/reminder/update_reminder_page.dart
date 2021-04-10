@@ -121,7 +121,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
                   margin: EdgeInsets.only(top: 16, bottom: 16),
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.grey[200]),
                   ),
                   child: Row(
@@ -141,7 +141,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
                   margin: EdgeInsets.only(top: 0, bottom: 16),
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(10),
                     color: AppColors.primaryColor,
                   ),
                   child: Row(
@@ -150,7 +150,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(10),
                           color: Colors.grey.withOpacity(0.5),
                         ),
                         child: Icon(
@@ -193,7 +193,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
                   child: Container(
                     margin: EdgeInsets.only(bottom: 16),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
+                      borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: Colors.grey[200]),
                     ),
                     alignment: Alignment.center,
@@ -207,7 +207,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: Colors.grey[200]),
                           ),
                           child: Text(
@@ -226,7 +226,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
                             selectedTextStyle: AppStyles.medium(
                                 size: 18, color: AppColors.primaryColor),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
+                              borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: Colors.grey[200]),
                             ),
                             onChanged: (value) {
@@ -246,7 +246,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
                             selectedTextStyle: AppStyles.medium(
                                 size: 18, color: AppColors.primaryColor),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
+                              borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: Colors.grey[200]),
                             ),
                             textMapper: (value) {
@@ -293,7 +293,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(10),
                           color: Colors.yellow,
                         ),
                         padding: EdgeInsets.all(6),
@@ -349,7 +349,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(10),
                           color: Colors.black,
                         ),
                         padding: EdgeInsets.all(6),
@@ -396,7 +396,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
                   child: RaisedButton(
                     color: AppColors.primaryColor,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
+                        borderRadius: BorderRadius.circular(10)),
                     onPressed: () {
                       BlocProvider.of<FirestoreBlocBloc>(context).add(
                           SaveReminder(

@@ -49,15 +49,15 @@ class ChooseRelatedTypePage extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadius.circular(10),
                         color: Colors.lightGreenAccent[100].withOpacity(0.5),
                       ),
                       child: Column(
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
                             ),
                             child: Image.asset(
                               AppAssets.leafBackground,
@@ -105,15 +105,15 @@ class ChooseRelatedTypePage extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.redAccent[100],
                     ),
                     child: Column(
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(5),
-                            topRight: Radius.circular(5),
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
                           ),
                           child: Image.asset(
                             AppAssets.flowerBackground,

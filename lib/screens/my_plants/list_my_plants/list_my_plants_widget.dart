@@ -32,7 +32,7 @@ class ListMyPlantsWidget extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       padding:
                           EdgeInsets.symmetric(horizontal: 10, vertical: 14),
@@ -52,15 +52,15 @@ class ListMyPlantsWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '${plant.commonName}',
+                                '${plant.commonName ?? 'Unknow'}',
                                 style: AppStyles.medium(),
                               ),
                               const SizedBox(
                                 height: 6,
                               ),
                               Text(
-                                "No reminder",
-                                style: AppStyles.light(size: 14),
+                                "Genus: ${plant.genus}",
+                                style: AppStyles.light(size: 12),
                               )
                             ],
                           ),

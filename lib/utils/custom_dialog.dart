@@ -17,7 +17,7 @@ class CustomDialog {
           actions: [
             RaisedButton(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 color: AppColors.primaryColor,
                 child: Container(
@@ -54,7 +54,7 @@ class CustomDialog {
           actions: [
             RaisedButton(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 color: AppColors.primaryColor,
                 child: Container(

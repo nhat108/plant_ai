@@ -18,6 +18,12 @@ class SaveToRecentSnap extends FirestoreBlocEvent {
 
 class GetListMyPlant extends FirestoreBlocEvent {}
 
+class DeletePlant extends FirestoreBlocEvent {
+  final String plantId;
+
+  DeletePlant({@required this.plantId});
+}
+
 class SaveNote extends FirestoreBlocEvent {
   final String plantId;
   final Map<String, dynamic> body;
@@ -26,9 +32,49 @@ class SaveNote extends FirestoreBlocEvent {
       {@required this.plantId, @required this.body, @required this.images});
 }
 
+class UpdateNote extends FirestoreBlocEvent {
+  final String plantId;
+  final Map<String, dynamic> body;
+  final List<File> images;
+  final String noteId;
+
+  UpdateNote(
+      {@required this.plantId,
+      @required this.body,
+      @required this.images,
+      @required this.noteId});
+}
+
+class DeleteNote extends FirestoreBlocEvent {
+  final String plantId;
+  final String noteId;
+
+  DeleteNote({@required this.plantId, @required this.noteId});
+}
+
 class SaveReminder extends FirestoreBlocEvent {
   final String plantId;
   final Map<String, dynamic> body;
 
   SaveReminder({@required this.plantId, @required this.body});
+}
+
+class RemoveFavourite extends FirestoreBlocEvent {
+  final String plantId;
+
+  RemoveFavourite({@required this.plantId});
+}
+
+///RECENT SNAP
+class AddToRecentSnap extends FirestoreBlocEvent {
+  final Map<String, dynamic> body;
+  final String plantId;
+  AddToRecentSnap({@required this.body, @required this.plantId});
+}
+
+class MoveRecentSnapToMyPlant extends FirestoreBlocEvent {
+  final String plantId;
+  final Map<String, dynamic> body;
+
+  MoveRecentSnapToMyPlant({@required this.plantId, @required this.body});
 }

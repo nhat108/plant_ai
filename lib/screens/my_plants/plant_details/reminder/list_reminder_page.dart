@@ -114,10 +114,6 @@ class _ListReminderPageState extends State<ListReminderPage> {
                               (element) => element.type == option.index,
                               orElse: null);
                           if (reminder != null) {
-                            if (reminder.repeat) {
-                              descripions.add(
-                                  'Every ${reminder.number} ${getDateType(reminder.dateType)}');
-                            }
                             if (reminder.isMorningOn) {
                               descripions.add(
                                   'Morning ${Helper.formatDateTime(reminder.morningTime, 'hh:mm a')}');
@@ -125,6 +121,12 @@ class _ListReminderPageState extends State<ListReminderPage> {
                             if (reminder.isEveningOn) {
                               descripions.add(
                                   'Evening ${Helper.formatDateTime(reminder.eveningTime, 'hh:mm a')}');
+                            }
+                            if (descripions.isNotEmpty) {
+                              if (reminder.repeat) {
+                                descripions.insert(0,
+                                    'Every ${reminder.number} ${getDateType(reminder.dateType)}(s)');
+                              }
                             }
                           }
                         } catch (e) {}
@@ -142,7 +144,7 @@ class _ListReminderPageState extends State<ListReminderPage> {
                                 padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   color: Colors.blue[50],
-                                  borderRadius: BorderRadius.circular(5),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: SvgPicture.asset(
                                   getIconPath(option),
@@ -172,7 +174,7 @@ class _ListReminderPageState extends State<ListReminderPage> {
                                 ),
                               ),
                               CupertinoSwitch(
-                                value: reminder != null,
+                                value: descripions.isNotEmpty,
                                 onChanged: (value) {
                                   showModalBottomSheet(
                                       context: context,

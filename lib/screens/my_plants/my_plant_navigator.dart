@@ -18,7 +18,7 @@ class _MyPlantNavigatorState extends State<MyPlantNavigator> {
       length: 2,
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FABWidget(),
         body: SafeArea(
           child: Container(
@@ -41,7 +41,7 @@ class _MyPlantNavigatorState extends State<MyPlantNavigator> {
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(
                             Icons.search,
@@ -53,7 +53,7 @@ class _MyPlantNavigatorState extends State<MyPlantNavigator> {
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(
                             Icons.calendar_today,
@@ -64,7 +64,7 @@ class _MyPlantNavigatorState extends State<MyPlantNavigator> {
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(
                             Icons.help,
@@ -78,7 +78,7 @@ class _MyPlantNavigatorState extends State<MyPlantNavigator> {
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -93,7 +93,7 @@ class _MyPlantNavigatorState extends State<MyPlantNavigator> {
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
                   child: TabBar(
                       indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadius.circular(10),
                         color: AppColors.lightColor,
                       ),
                       indicatorSize: TabBarIndicatorSize.tab,
