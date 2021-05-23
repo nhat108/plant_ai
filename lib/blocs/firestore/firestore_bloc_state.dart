@@ -18,6 +18,8 @@ class FirestoreBlocState extends Equatable {
   final bool deletePlantLoading;
   final bool deletePlantSuccess;
 
+  final List<Reminder> listReminders;
+
   FirestoreBlocState({
     this.savePlantError,
     this.saveNoteLoading,
@@ -33,6 +35,7 @@ class FirestoreBlocState extends Equatable {
     this.deleteNoteSuccess,
     this.deletePlantLoading,
     this.deletePlantSuccess,
+    this.listReminders,
   });
 
   @override
@@ -51,23 +54,26 @@ class FirestoreBlocState extends Equatable {
         this.deleteNoteSuccess,
         this.deletePlantLoading,
         this.deletePlantSuccess,
+        this.listReminders,
       ];
   factory FirestoreBlocState.empty() {
     return FirestoreBlocState(
-        savePlantLoading: false,
-        saveNoteError: '',
-        saveNoteLoading: false,
-        savePlantError: '',
-        saveNoteSuccess: false,
-        savePlantSuccess: false,
-        saveReminderError: '',
-        saveReminderLoading: false,
-        saveReminderSuccess: false,
-        removeFavouriteError: '',
-        removeFavouriteLoading: false,
-        deleteNoteSuccess: false,
-        deletePlantLoading: false,
-        deletePlantSuccess: false);
+      savePlantLoading: false,
+      saveNoteError: '',
+      saveNoteLoading: false,
+      savePlantError: '',
+      saveNoteSuccess: false,
+      savePlantSuccess: false,
+      saveReminderError: '',
+      saveReminderLoading: false,
+      saveReminderSuccess: false,
+      removeFavouriteError: '',
+      removeFavouriteLoading: false,
+      deleteNoteSuccess: false,
+      deletePlantLoading: false,
+      deletePlantSuccess: false,
+      listReminders: [],
+    );
   }
 
   FirestoreBlocState copyWith({
@@ -85,8 +91,10 @@ class FirestoreBlocState extends Equatable {
     final bool deleteNoteSuccess,
     final bool deletePlantLoading,
     final bool deletePlantSuccess,
+    final List<Reminder> listReminders,
   }) {
     return FirestoreBlocState(
+      listReminders: listReminders ?? this.listReminders,
       deletePlantSuccess: deletePlantSuccess ?? this.deletePlantSuccess,
       deletePlantLoading: deletePlantLoading ?? this.deletePlantLoading,
       deleteNoteSuccess: deleteNoteSuccess ?? this.deleteNoteSuccess,

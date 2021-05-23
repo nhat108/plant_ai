@@ -1,15 +1,16 @@
 import 'dart:io';
 
-import 'package:flower/blocs/plant_details/plant_details_bloc.dart';
+import 'package:flower/models/plant_model.dart';
 import 'package:flower/widgets/cache_image_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flower/utils/extensions.dart';
 
 class ImagePlant extends StatefulWidget {
   final String imagePath;
+  final PlantModel plant;
 
-  const ImagePlant({Key key, @required this.imagePath}) : super(key: key);
+  const ImagePlant({Key key, @required this.imagePath, @required this.plant})
+      : super(key: key);
 
   @override
   _ImagePlantState createState() => _ImagePlantState();
@@ -47,6 +48,7 @@ class _ImagePlantState extends State<ImagePlant> {
                   )
                 : Image.file(
                     File(widget.imagePath),
+                    width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.width * 0.7,
                     fit: BoxFit.cover,
                   ),
@@ -56,47 +58,35 @@ class _ImagePlantState extends State<ImagePlant> {
           ),
           Align(
             alignment: Alignment.centerLeft,
-            child: BlocBuilder<PlantDetailsBloc, PlantDetailsState>(
-                builder: (context, state) {
-              if (state.plantDetails != null) {
-                List<String> image = state.plantDetails.images.leafs
-                        .map((e) => e.imageUrl)
-                        .toList() +
-                    state.plantDetails.images.fruits
-                        .map((e) => e.imageUrl)
-                        .toList();
-                return SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(image.length, (index) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (currentImage == image[index]) {
-                              currentImage = null;
-                            } else {
-                              currentImage = image[index];
-                            }
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 15),
-                          child: CacheImageWidget(
-                            imageUrl: '${image[index]}',
-                            width: 60,
-                            height: 60,
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                );
-              }
-              return Container();
-            }),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: List.generate(widget.plant.images.length, (index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (currentImage == widget.plant.images[index]) {
+                          currentImage = null;
+                        } else {
+                          currentImage = widget.plant.images[index];
+                        }
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 15),
+                      child: CacheImageWidget(
+                        imageUrl: '${widget.plant.images[index]}',
+                        width: 60,
+                        height: 60,
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
           )
         ],
       ),

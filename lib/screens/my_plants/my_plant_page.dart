@@ -6,13 +6,18 @@ import 'package:flutter/material.dart';
 import 'my_plant_navigator.dart';
 
 class MyPlantPage extends StatefulWidget {
+  final VoidCallback onHelpTap;
+
+  const MyPlantPage({Key key, this.onHelpTap}) : super(key: key);
   @override
   _SearchPageState createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<MyPlantPage> {
+class _SearchPageState extends State<MyPlantPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -39,9 +44,14 @@ class _SearchPageState extends State<MyPlantPage> {
               color: Colors.white.withOpacity(0.5),
             ),
           ),
-          MyPlantNavigator(),
+          MyPlantNavigator(
+            onHelpTap: widget.onHelpTap,
+          ),
         ],
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

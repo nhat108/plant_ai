@@ -1,7 +1,7 @@
 import 'package:flower/blocs/firestore/firestore_bloc_bloc.dart';
 import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_styles.dart';
-import 'package:flower/models/plant.dart';
+import 'package:flower/models/plant_model.dart';
 import 'package:flower/screens/my_plants/plant_details/app_bar.dart';
 import 'package:flower/screens/my_plants/plant_details/notes/list_notes_page.dart';
 import 'package:flower/screens/my_plants/plant_details/reminder/list_reminder_page.dart';
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlantDetailsPage extends StatefulWidget {
-  final Plant plant;
+  final PlantModel plant;
 
   const PlantDetailsPage({Key key, @required this.plant}) : super(key: key);
   @override

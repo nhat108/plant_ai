@@ -1,17 +1,20 @@
+import 'dart:io';
+
 import 'package:flower/blocs/firestore/firestore_bloc_bloc.dart';
 import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_styles.dart';
 import 'package:flower/models/note.dart';
-import 'package:flower/models/plant.dart';
-import 'package:flower/utils/custom_dialog.dart';
+import 'package:flower/models/plant_model.dart';
 import 'package:flower/widgets/background_app.dart';
+import 'package:flower/widgets/cache_image_widget.dart';
 import 'package:flower/widgets/loading_overlay_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class UpdateNotePage extends StatefulWidget {
-  final Plant plant;
+  final PlantModel plant;
   final Note note;
 
   const UpdateNotePage({Key key, @required this.note, @required this.plant})
@@ -26,9 +29,12 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
   final TextEditingController _timeController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   var now = DateTime.now();
+  List<File> images = [];
+  List<String> imagesUploaded = [];
   @override
   void initState() {
-    _nameController.text = widget.plant.commonName;
+    imagesUploaded = widget.note.images;
+    _nameController.text = widget.plant.name;
 
     _dateController.text =
         DateFormat.yMMMMd('en_US').format(DateTime.parse(widget.note.date));
@@ -60,13 +66,14 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
                     UpdateNote(
                       plantId: widget.plant.id.toString(),
                       body: {
-                        'name': widget.plant.commonName,
+                        'name': widget.plant.name,
                         'date': now.toIso8601String(),
                         'note': _noteController.text,
                         'images': [],
                       },
+                      imagesUploaded: imagesUploaded,
                       noteId: widget.note.id,
-                      images: [],
+                      images: images,
                     ),
                   );
                 },
@@ -85,6 +92,7 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
             : Container(),
         appBar: AppBar(
           elevation: 0,
+          brightness: Brightness.light,
           backgroundColor: Colors.white,
           leading: IconButton(
             onPressed: () {
@@ -177,20 +185,111 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                        color: AppColors.secondaryColor)),
-                                height: 90,
-                                width: 90,
-                                child: Icon(Icons.camera_alt),
-                              )
-                            ],
-                          ),
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  onTap: () async {
+                                    var image = await ImagePicker()
+                                        .getImage(source: ImageSource.gallery);
+                                    if (image != null) {
+                                      setState(() {
+                                        images.add(File(image.path));
+                                      });
+                                    }
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey[100],
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: AppColors.secondaryColor)),
+                                    height: 90,
+                                    width: 90,
+                                    child: Icon(Icons.camera_alt),
+                                  ),
+                                )
+                              ]
+                                ..addAll(imagesUploaded.map((e) {
+                                  return Stack(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: CacheImageWidget(
+                                            imageUrl: e,
+                                            width: 90,
+                                            borderRadius: 10,
+                                            height: 90),
+                                      ),
+                                      Positioned(
+                                        top: 0,
+                                        right: 4,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              imagesUploaded.remove(e);
+                                            });
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(2),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.primaryColor,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Icon(
+                                              Icons.clear,
+                                              size: 16,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  );
+                                }).toList())
+                                ..addAll(images.map((e) {
+                                  return Stack(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.file(
+                                            e,
+                                            height: 90,
+                                            width: 90,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        top: 0,
+                                        right: 4,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              images.remove(e);
+                                            });
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(2),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.primaryColor,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Icon(
+                                              Icons.clear,
+                                              size: 16,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  );
+                                }).toList())),
                         )
                       ],
                     ),

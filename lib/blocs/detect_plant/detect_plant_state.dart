@@ -4,18 +4,21 @@ class DetectPlantState extends Equatable {
   final bool detectPlantLoading;
   final bool detectPlantSuccess;
   final String detectPlantError;
+  final List<Recogition> recogitions;
 
   final bool searchPlantLoading;
-  final List<Plant> listPlants;
+  final List listPlants;
   final String searchPlantError;
 
-  DetectPlantState(
-      {this.detectPlantLoading,
-      this.detectPlantSuccess,
-      this.detectPlantError,
-      this.searchPlantLoading,
-      this.listPlants,
-      this.searchPlantError});
+  DetectPlantState({
+    this.detectPlantLoading,
+    this.detectPlantSuccess,
+    this.detectPlantError,
+    this.searchPlantLoading,
+    this.listPlants,
+    this.searchPlantError,
+    this.recogitions,
+  });
   factory DetectPlantState.empty() {
     return DetectPlantState(
       detectPlantError: '',
@@ -24,6 +27,7 @@ class DetectPlantState extends Equatable {
       listPlants: [],
       searchPlantError: '',
       searchPlantLoading: false,
+      recogitions: [],
     );
   }
   DetectPlantState copyWith({
@@ -31,10 +35,12 @@ class DetectPlantState extends Equatable {
     final bool detectPlantSuccess,
     final String detectPlantError,
     final bool searchPlantLoading,
-    final List<Plant> listPlants,
+    final List listPlants,
     final String searchPlantError,
+    List<Recogition> recogitions,
   }) {
     return DetectPlantState(
+      recogitions: recogitions ?? this.recogitions,
       detectPlantError: detectPlantError ?? this.detectPlantError,
       detectPlantLoading: detectPlantLoading ?? this.detectPlantLoading,
       detectPlantSuccess: detectPlantSuccess ?? this.detectPlantSuccess,
@@ -46,6 +52,7 @@ class DetectPlantState extends Equatable {
 
   @override
   List<Object> get props => [
+        this.recogitions,
         this.detectPlantLoading,
         this.detectPlantSuccess,
         this.detectPlantError,

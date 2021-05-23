@@ -1,7 +1,7 @@
 import 'package:flower/blocs/firestore/firestore_bloc_bloc.dart';
 import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_styles.dart';
-import 'package:flower/models/plant.dart';
+import 'package:flower/models/plant_model.dart';
 import 'package:flower/widgets/cache_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class RecentSnapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<Plant>>(
+    return StreamBuilder<List<PlantModel>>(
         stream: BlocProvider.of<FirestoreBlocBloc>(context).getListRecentSnap(),
         builder: (_, snapshot) {
           if (snapshot.hasData) {
@@ -26,7 +26,7 @@ class RecentSnapWidget extends StatelessWidget {
                       children: [
                         CacheImageWidget(
                           borderRadius: 1000,
-                          imageUrl: plant.imageUrl,
+                          imageUrl: plant.images.first,
                           width: 50,
                           height: 50,
                         ),
@@ -35,7 +35,7 @@ class RecentSnapWidget extends StatelessWidget {
                         ),
                         Expanded(
                             child: Text(
-                          "${plant.commonName ?? 'Unknow'}",
+                          "${plant.name ?? 'Unknow'}",
                           style: AppStyles.medium(size: 16),
                         )),
                         GestureDetector(

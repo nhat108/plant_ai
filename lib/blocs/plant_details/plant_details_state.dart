@@ -2,7 +2,7 @@ part of 'plant_details_bloc.dart';
 
 class PlantDetailsState extends Equatable {
   final bool getPlantDetailsLoading;
-  final PlantDetails plantDetails;
+  final PlantModel plantDetails;
   final String getPlantDetailsError;
 
   PlantDetailsState(
@@ -19,7 +19,7 @@ class PlantDetailsState extends Equatable {
   }
   PlantDetailsState copyWith({
     bool getPlantDetailsLoading,
-    PlantDetails plantDetails,
+    PlantModel plantDetails,
     String getPlantDetailsError,
   }) {
     return PlantDetailsState(

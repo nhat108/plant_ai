@@ -2,14 +2,14 @@ import 'package:flower/blocs/firestore/firestore_bloc_bloc.dart';
 import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_routes.dart';
 import 'package:flower/configs/app_styles.dart';
-import 'package:flower/models/plant.dart';
+import 'package:flower/models/plant_model.dart';
 import 'package:flower/screens/home_page/plant_details/plant_details_page.dart';
 import 'package:flower/widgets/cache_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlantDetailsAppBar extends StatelessWidget {
-  final Plant plant;
+  final PlantModel plant;
 
   const PlantDetailsAppBar({Key key, @required this.plant}) : super(key: key);
   @override
@@ -32,7 +32,7 @@ class PlantDetailsAppBar extends StatelessWidget {
       ],
       expandedHeight: 200.0,
       flexibleSpace: FlexibleSpaceBar(
-        title: Text('${plant.commonName}'),
+        title: Text('${plant.name}'),
         background: Container(
           height: 200,
           color: Colors.white,
@@ -47,7 +47,7 @@ class PlantDetailsAppBar extends StatelessWidget {
                   child: CacheImageWidget(
                       width: double.infinity,
                       height: 200,
-                      imageUrl: '${plant.imageUrl}'),
+                      imageUrl: '${plant.images.first}'),
                 ),
               ),
               Positioned(
@@ -71,7 +71,7 @@ class PlantDetailsAppBar extends StatelessWidget {
                         width: 20,
                       ),
                       Text(
-                        "${plant.commonName}",
+                        "${plant.name}",
                         style: AppStyles.medium(size: 20),
                       ),
                       IconButton(
@@ -83,8 +83,9 @@ class PlantDetailsAppBar extends StatelessWidget {
                             AppRoutes.push(
                                 context,
                                 PlantDetailsById(
+                                    plant: plant,
                                     id: plant.id.toString(),
-                                    imagePath: plant.imageUrl));
+                                    imagePath: plant.images.first));
                           })
                     ],
                   ),

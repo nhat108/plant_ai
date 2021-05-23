@@ -3,8 +3,8 @@ import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_styles.dart';
 import 'package:flower/configs/assets.dart';
 import 'package:flower/models/plant.dart';
+import 'package:flower/models/plant_model.dart';
 import 'package:flower/models/reminder.dart';
-import 'package:flower/screens/home_page/detect_plant/widgets/loading_widget.dart';
 import 'package:flower/utils/custom_dialog.dart';
 import 'package:flower/utils/helper.dart';
 import 'package:flower/widgets/expanded_widget.dart';
@@ -19,7 +19,7 @@ import 'package:numberpicker/numberpicker.dart';
 class UpdateReminderPage extends StatefulWidget {
   final CareOptions option;
   final Reminder reminder;
-  final Plant plant;
+  final PlantModel plant;
 
   const UpdateReminderPage(
       {Key key,
@@ -133,7 +133,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text("${widget.plant.commonName}")
+                      Text("${widget.plant.name}")
                     ],
                   ),
                 ),

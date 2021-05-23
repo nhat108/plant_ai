@@ -21,9 +21,15 @@ class _NavigatorBuilderState extends State<NavigatorBuilder> {
   void initState() {
     pages = [
       HomePage(),
-      MyPlantPage(),
-      FavouritePage(),
-      ProfilePage(),
+      MyPlantPage(
+        onHelpTap: () {
+          setState(() {
+            _currentPage = 2;
+          });
+        },
+      ),
+      HelpIcon(),
+      SettingsPage(),
     ];
     super.initState();
   }
@@ -31,7 +37,10 @@ class _NavigatorBuilderState extends State<NavigatorBuilder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[_currentPage],
+      body: IndexedStack(
+        children: pages,
+        index: _currentPage,
+      ),
       bottomNavigationBar: MyBottomNavigationBar(
         currentIndex: _currentPage,
         onChanged: (value) {

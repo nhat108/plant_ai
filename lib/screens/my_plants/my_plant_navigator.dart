@@ -1,5 +1,7 @@
 import 'package:flower/configs/app_colors.dart';
+import 'package:flower/configs/app_routes.dart';
 import 'package:flower/configs/app_styles.dart';
+import 'package:flower/screens/my_plants/plant_details/calendar/calendar_event.dart';
 import 'package:flutter/material.dart';
 
 import 'fab.dart';
@@ -7,6 +9,9 @@ import 'list_my_plants/list_my_plants_widget.dart';
 import 'recent_snap/recent_snap_widget.dart';
 
 class MyPlantNavigator extends StatefulWidget {
+  final VoidCallback onHelpTap;
+
+  const MyPlantNavigator({Key key, this.onHelpTap}) : super(key: key);
   @override
   _MyPlantNavigatorState createState() => _MyPlantNavigatorState();
 }
@@ -36,39 +41,50 @@ class _MyPlantNavigatorState extends State<MyPlantNavigator> {
                     ),
                     Row(
                       children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 10),
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            Icons.search,
-                            size: 18,
+                        // Container(
+                        //   margin: EdgeInsets.only(right: 10),
+                        //   padding: EdgeInsets.all(8),
+                        //   decoration: BoxDecoration(
+                        //     border: Border.all(color: Colors.black),
+                        //     borderRadius: BorderRadius.circular(10),
+                        //   ),
+                        //   child: Icon(
+                        //     Icons.search,
+                        //     size: 18,
+                        //   ),
+                        // ),
+
+                        GestureDetector(
+                          onTap: () {
+                            AppRoutes.push(context, CalendarEventPage());
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Icon(
+                              Icons.calendar_today,
+                              size: 18,
+                            ),
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(right: 10),
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            Icons.calendar_today,
-                            size: 18,
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            Icons.help,
-                            size: 18,
+                        GestureDetector(
+                          onTap: () {
+                            widget.onHelpTap();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Icon(
+                              Icons.help,
+                              size: 18,
+                            ),
                           ),
                         ),
                       ],

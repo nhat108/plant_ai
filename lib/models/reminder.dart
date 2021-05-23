@@ -14,6 +14,7 @@ class Reminder {
   final DateType dateType;
   final bool isMorningOn;
   final bool isEveningOn;
+  final String plantName;
   Reminder({
     this.type,
     this.morningTime,
@@ -23,17 +24,20 @@ class Reminder {
     this.dateType,
     this.isEveningOn,
     this.isMorningOn,
+    this.plantName,
   });
   factory Reminder.fromJson(Map<String, dynamic> json) {
     return Reminder(
-        dateType: DateType.values[json['date_type']],
-        eveningTime: json['evening_time'],
-        morningTime: json['morning_time'],
-        number: json['number'],
-        repeat: json['repeat'],
-        type: json['type'],
-        isEveningOn: json['is_evening_on'],
-        isMorningOn: json['is_morning_on']);
+      dateType: DateType.values[json['date_type']],
+      eveningTime: json['evening_time'],
+      morningTime: json['morning_time'],
+      number: json['number'],
+      repeat: json['repeat'],
+      type: json['type'],
+      isEveningOn: json['is_evening_on'],
+      isMorningOn: json['is_morning_on'],
+      plantName: json['plant_name'],
+    );
   }
   Map<String, dynamic> toMap() {
     return {
@@ -49,11 +53,16 @@ class Reminder {
   }
 
   factory Reminder.defaultData(int type) {
+    var now = DateTime.now();
+    var morning =
+        DateTime(now.year, now.month, now.day, 10, 00).toIso8601String();
+    var evening =
+        DateTime(now.year, now.month, now.day, 18, 00).toIso8601String();
     return Reminder(
         type: type,
         dateType: DateType.Day,
-        eveningTime: '20120227 18:00:00',
-        morningTime: '20120227 10:00:00',
+        eveningTime: evening,
+        morningTime: morning,
         number: 1,
         repeat: true,
         isEveningOn: false,
@@ -68,8 +77,10 @@ class Reminder {
     final DateType dateType,
     final bool isMorningOn,
     final bool isEveningOn,
+    final String plantName,
   }) {
     return Reminder(
+      plantName: plantName ?? this.plantName,
       type: type ?? this.type,
       dateType: dateType ?? this.dateType,
       eveningTime: eveningTime ?? this.eveningTime,

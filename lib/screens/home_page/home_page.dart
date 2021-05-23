@@ -1,18 +1,20 @@
 import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_routes.dart';
 import 'package:flower/configs/app_styles.dart';
+import 'package:flower/configs/assets.dart';
 import 'package:flower/screens/home_page/ai_detection/camera_dectection_page.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'ai_detection/choose_related_type.dart';
+import 'detect_plant/detect_plant_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
@@ -20,35 +22,45 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Stack(
       children: [
         Container(
           color: AppColors.primaryColor,
-        ),
-        Positioned(
-          left: 20,
-          top: 20,
-          child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Plant",
-                  style: AppStyles.black(
-                    size: 40,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  "Identication",
-                  style: AppStyles.medium(size: 30, color: Colors.white),
-                )
-              ],
-            ),
+          // child: Image.asset(AppAssets.background1),
+          child: Image.asset(
+            AppAssets.plantBackground2,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.47,
+            fit: BoxFit.cover,
           ),
         ),
+        // Positioned(
+        //   left: 20,
+        //   top: 20,
+        //   child: SafeArea(
+        //     child: Column(
+        //       crossAxisAlignment: CrossAxisAlignment.start,
+        //       children: [
+        //         Text(
+        //           "Plant",
+        //           style: AppStyles.black(
+        //             size: 40,
+        //             // color: Colors.white,
+        //           ),
+        //         ),
+        //         Text(
+        //           "Identication",
+        //           style: AppStyles.medium(
+        //             size: 30,
+        //           ),
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
         Container(
-          margin: EdgeInsets.only(top: 200),
+          margin: EdgeInsets.only(top: 300),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
@@ -119,10 +131,7 @@ class _HomePageState extends State<HomePage> {
                       var image = await ImagePicker()
                           .getImage(source: ImageSource.gallery);
                       AppRoutes.push(
-                          context,
-                          ChooseRelatedTypePage(
-                            imagePath: image.path,
-                          ));
+                          context, DetectPlantPage(filePath: image.path));
                     },
                     child: Container(
                       width: 65,
@@ -153,4 +162,7 @@ class _HomePageState extends State<HomePage> {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

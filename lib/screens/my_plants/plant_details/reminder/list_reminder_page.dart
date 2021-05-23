@@ -3,6 +3,7 @@ import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_styles.dart';
 import 'package:flower/configs/assets.dart';
 import 'package:flower/models/plant.dart';
+import 'package:flower/models/plant_model.dart';
 import 'package:flower/models/reminder.dart';
 import 'package:flower/screens/my_plants/plant_details/reminder/update_reminder_page.dart';
 import 'package:flower/utils/helper.dart';
@@ -12,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ListReminderPage extends StatefulWidget {
-  final Plant plant;
+  final PlantModel plant;
 
   const ListReminderPage({Key key, @required this.plant}) : super(key: key);
   @override

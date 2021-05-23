@@ -37,12 +37,15 @@ class UpdateNote extends FirestoreBlocEvent {
   final Map<String, dynamic> body;
   final List<File> images;
   final String noteId;
+  final List<String> imagesUploaded;
 
-  UpdateNote(
-      {@required this.plantId,
-      @required this.body,
-      @required this.images,
-      @required this.noteId});
+  UpdateNote({
+    @required this.plantId,
+    @required this.body,
+    @required this.images,
+    @required this.noteId,
+    @required this.imagesUploaded,
+  });
 }
 
 class DeleteNote extends FirestoreBlocEvent {
@@ -59,10 +62,11 @@ class SaveReminder extends FirestoreBlocEvent {
   SaveReminder({@required this.plantId, @required this.body});
 }
 
-class RemoveFavourite extends FirestoreBlocEvent {
+class ChangeFavourite extends FirestoreBlocEvent {
   final String plantId;
+  final Map<String, dynamic> body;
 
-  RemoveFavourite({@required this.plantId});
+  ChangeFavourite({@required this.plantId, @required this.body});
 }
 
 ///RECENT SNAP
@@ -78,3 +82,6 @@ class MoveRecentSnapToMyPlant extends FirestoreBlocEvent {
 
   MoveRecentSnapToMyPlant({@required this.plantId, @required this.body});
 }
+
+///List Reminders
+class GetListReminders extends FirestoreBlocEvent {}

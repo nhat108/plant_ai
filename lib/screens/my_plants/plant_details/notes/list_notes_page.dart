@@ -3,17 +3,18 @@ import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_routes.dart';
 import 'package:flower/configs/app_styles.dart';
 import 'package:flower/models/note.dart';
-import 'package:flower/models/plant.dart';
+import 'package:flower/models/plant_model.dart';
 import 'package:flower/screens/home_page/detect_plant/widgets/error_widget.dart';
 import 'package:flower/screens/home_page/detect_plant/widgets/loading_widget.dart';
 import 'package:flower/screens/my_plants/plant_details/notes/add_note_page.dart';
 import 'package:flower/screens/my_plants/plant_details/notes/update_note_page.dart';
 import 'package:flower/utils/helper.dart';
+import 'package:flower/widgets/cache_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListNotesPage extends StatelessWidget {
-  final Plant plant;
+  final PlantModel plant;
 
   const ListNotesPage({Key key, @required this.plant}) : super(key: key);
   @override
@@ -140,6 +141,23 @@ class ListNotesPage extends StatelessWidget {
                                     "${e.note}",
                                     style: AppStyles.light(size: 16),
                                   ),
+                                  if (e.images.isNotEmpty)
+                                    Column(
+                                      children: [
+                                        Divider(),
+                                        SingleChildScrollView(
+                                          child: Row(
+                                            children: e.images.map((e) {
+                                              return CacheImageWidget(
+                                                  imageUrl: e,
+                                                  borderRadius: 10,
+                                                  width: 60,
+                                                  height: 60);
+                                            }).toList(),
+                                          ),
+                                        )
+                                      ],
+                                    )
                                 ],
                               ),
                             ),

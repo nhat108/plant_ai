@@ -3,6 +3,11 @@ class AppAssets {
   static final String plantBackground = 'assets/images/plant_background.png';
   static final String leafBackground = 'assets/images/leaf_background.jpeg';
   static final String flowerBackground = 'assets/images/flower_background.jpeg';
+  static final String gardeningBackground =
+      'assets/images/help_background.jpeg';
+  static final String background = 'assets/images/background.jpeg';
+  static final String background1 = 'assets/images/background1.png';
+  static final String plantBackground2 = 'assets/images/plant_background_2.png';
 
   ///Icon
   static final String leafIcon = 'assets/images/leaf.svg';
@@ -21,11 +26,11 @@ class AppAssets {
   static final String leafIcon3 = 'assets/images/leaf3_icon.svg';
 
   ///MODEL
-  static final String mobileNetModel =
-      'assets/models/mobilenet_v1_1.0_224.tflite';
-  static final String mobileNetLabel = 'assets/models/mobilenet_v1_1.0_224.txt';
-  static final String yolovModel = 'assets/models/yolov2_tiny.tflite';
-  static final String yolovLabel = 'assets/models/yolov2_tiny.txt';
+
   static final String plantModel = 'assets/models/plant_model.tflite';
   static final String plantLabel = 'assets/models/plant_label.txt';
+  static final String model = 'assets/models/nhat2.tflite';
+  static final String label = 'assets/models/lable.txt';
+  // static final String model = 'assets/models/nhat.tflite';
+  // static final String label = 'assets/models/label2.txt';
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flower/models/plant.dart';
+import 'package:flower/models/plant_model.dart';
 import 'package:flower/repository/trefle_api_client.dart';
 import 'package:meta/meta.dart';
 
@@ -25,7 +25,7 @@ class PlantDetailsBloc extends Bloc<PlantDetailsEvent, PlantDetailsState> {
         final model = await TrefleApiClient().getPlantDetails(event.id);
         yield state.copyWith(
           getPlantDetailsLoading: false,
-          plantDetails: model,
+          // plantDetails: model,
         );
       } catch (e) {
         print(e);

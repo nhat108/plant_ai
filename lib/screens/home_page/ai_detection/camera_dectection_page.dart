@@ -4,10 +4,9 @@ import 'package:camerawesome/camerapreview.dart';
 import 'package:camerawesome/camerawesome_plugin.dart';
 import 'package:flower/configs/app_colors.dart';
 import 'package:flower/configs/app_routes.dart';
+import 'package:flower/screens/home_page/detect_plant/detect_plant_page.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-
-import 'choose_related_type.dart';
 
 class CameraDetectionPage extends StatefulWidget {
   CameraDetectionPage();
@@ -77,7 +76,7 @@ class _CameraDetectionPageState extends State<CameraDetectionPage>
                         '${testDir.path}/${DateTime.now().millisecondsSinceEpoch}.jpg';
                     await _pictureController.takePicture(filePath);
                     AppRoutes.push(
-                        context, ChooseRelatedTypePage(imagePath: filePath));
+                        context, DetectPlantPage(filePath: filePath));
                   },
                   child: Container(
                     margin: EdgeInsets.all(15),

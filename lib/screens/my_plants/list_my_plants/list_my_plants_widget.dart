@@ -1,7 +1,7 @@
 import 'package:flower/blocs/firestore/firestore_bloc_bloc.dart';
 import 'package:flower/configs/app_routes.dart';
 import 'package:flower/configs/app_styles.dart';
-import 'package:flower/models/plant.dart';
+import 'package:flower/models/plant_model.dart';
 import 'package:flower/screens/home_page/detect_plant/widgets/error_widget.dart';
 import 'package:flower/screens/home_page/detect_plant/widgets/loading_widget.dart';
 import 'package:flower/screens/my_plants/plant_details/plant_details_page.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ListMyPlantsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<Plant>>(
+    return StreamBuilder<List<PlantModel>>(
         stream:
             BlocProvider.of<FirestoreBlocBloc>(context).getListMyPlantStream(),
         builder: (context, snapshot) {
@@ -41,7 +41,7 @@ class ListMyPlantsWidget extends StatelessWidget {
                         children: [
                           CacheImageWidget(
                             borderRadius: 1000,
-                            imageUrl: '${plant.imageUrl}',
+                            imageUrl: '${plant.images.first}',
                             width: 50,
                             height: 50,
                           ),
@@ -52,7 +52,7 @@ class ListMyPlantsWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '${plant.commonName ?? 'Unknow'}',
+                                '${plant.name ?? 'Unknow'}',
                                 style: AppStyles.medium(),
                               ),
                               const SizedBox(
