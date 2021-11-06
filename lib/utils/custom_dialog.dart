@@ -10,34 +10,35 @@ class CustomDialog {
     VoidCallback onPressed,
   }) {
     return showDialog(
-        context: context,
-        child: AlertDialog(
-          title: Text(title),
-          actionsPadding: EdgeInsets.symmetric(horizontal: 23),
-          actions: [
-            RaisedButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(title),
+        actionsPadding: EdgeInsets.symmetric(horizontal: 23),
+        actions: [
+          RaisedButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              color: AppColors.primaryColor,
+              child: Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                  'Close',
+                  style: AppStyles.medium(),
                 ),
-                color: AppColors.primaryColor,
-                child: Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    'Close',
-                    style: AppStyles.medium(),
-                  ),
-                ),
-                onPressed: onPressed ??
-                    () {
-                      Navigator.pop(context);
-                    })
-          ],
-          content: Text(
-            message,
-            style: AppStyles.regular(),
-          ),
-        ));
+              ),
+              onPressed: onPressed ??
+                  () {
+                    Navigator.pop(context);
+                  })
+        ],
+        content: Text(
+          message,
+          style: AppStyles.regular(),
+        ),
+      ),
+    );
   }
 
   static showInfo(
@@ -48,32 +49,32 @@ class CustomDialog {
   }) {
     return showDialog(
         context: context,
-        child: AlertDialog(
-          title: Text(title),
-          actionsPadding: EdgeInsets.symmetric(horizontal: 23),
-          actions: [
-            RaisedButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                color: AppColors.primaryColor,
-                child: Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    'Close',
-                    style: AppStyles.medium(),
-                  ),
-                ),
-                onPressed: onPressed ??
-                    () {
-                      Navigator.pop(context);
-                    })
-          ],
-          content: Text(
-            message,
-            style: AppStyles.regular(),
-          ),
-        ));
+        builder: (_) => AlertDialog(
+              title: Text(title),
+              actionsPadding: EdgeInsets.symmetric(horizontal: 23),
+              actions: [
+                RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: AppColors.primaryColor,
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width,
+                      child: Text(
+                        'Close',
+                        style: AppStyles.medium(),
+                      ),
+                    ),
+                    onPressed: onPressed ??
+                        () {
+                          Navigator.pop(context);
+                        })
+              ],
+              content: Text(
+                message,
+                style: AppStyles.regular(),
+              ),
+            ));
   }
 }

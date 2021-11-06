@@ -1,5 +1,0 @@
-cay_luoi_ho
-cay_nha_dam
-cay_tuyet_tung
-cay_trau_ba
-cay_van_thien_thanh

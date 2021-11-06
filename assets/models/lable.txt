@@ -1,9 +1,0 @@
-cay_day_nhen
-cay_kim_tien
-cay_luoi_ho
-cay_ngoc_bich
-cay_nguyet_que
-cay_nha_dam
-cay_thiet_moc_lan
-cay_trau_ba
-cay_van_thien_thanh

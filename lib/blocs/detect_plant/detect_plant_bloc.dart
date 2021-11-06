@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flower/configs/assets.dart';
 import 'package:flower/models/recognition.dart';
 import 'package:flower/repository/trefle_api_client.dart';
+import 'package:flower/utils/constants.dart';
 import 'package:meta/meta.dart';
 import 'package:tflite/tflite.dart';
 part 'detect_plant_event.dart';
@@ -19,10 +20,12 @@ class DetectPlantBloc extends Bloc<DetectPlantEvent, DetectPlantState> {
     try {
       Tflite.close();
       print('loading...');
+
       await Tflite.loadModel(
         model: AppAssets.model,
         labels: AppAssets.label,
       );
+
       loadMoreDone = true;
       // await _detectPlant();
 
@@ -46,6 +49,7 @@ class DetectPlantBloc extends Bloc<DetectPlantEvent, DetectPlantState> {
       try {
         yield state.copyWith(
             detectPlantLoading: true, detectPlantError: '', recogitions: []);
+
         List<dynamic> results = await Tflite.runModelOnImage(
           path: event.imagePath,
           threshold: 0.5,
@@ -53,9 +57,18 @@ class DetectPlantBloc extends Bloc<DetectPlantEvent, DetectPlantState> {
           imageStd: 127.5,
           numResults: 2,
         );
+
         print(results);
         List<Recogition> listRecogitions =
             results.map((e) => Recogition.fromJson(e)).toList();
+        // if (listRecogitions.isNotEmpty) {
+        //   var recogition = listRecogitions.first;
+
+        //   // var name = Constants.MAP_PLANT_TEXT[recogition.detectedClass];
+        //   add(SearchPlant(
+        //     query: recogition.detectedClass,
+        //   ));
+        // }
 
         yield state.copyWith(
           detectPlantLoading: false,

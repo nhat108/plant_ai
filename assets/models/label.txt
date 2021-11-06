@@ -1,0 +1,9 @@
+cay_trau_ba
+cay_ngoc_bich
+cay_nha_dam
+cay_kim_tien
+cay_day_nhen
+cay_thiet_moc_lan
+cay_luoi_ho
+cay_van_thien_thanh
+cay_nguyet_que

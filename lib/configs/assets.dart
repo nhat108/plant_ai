@@ -29,8 +29,8 @@ class AppAssets {
 
   static final String plantModel = 'assets/models/plant_model.tflite';
   static final String plantLabel = 'assets/models/plant_label.txt';
-  static final String model = 'assets/models/nhat2.tflite';
-  static final String label = 'assets/models/lable.txt';
+  static final String model = 'assets/models/model.tflite';
+  static final String label = 'assets/models/label.txt';
   // static final String model = 'assets/models/nhat.tflite';
   // static final String label = 'assets/models/label2.txt';
 }

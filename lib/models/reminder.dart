@@ -15,6 +15,7 @@ class Reminder {
   final bool isMorningOn;
   final bool isEveningOn;
   final String plantName;
+  final String createdAt;
   Reminder({
     this.type,
     this.morningTime,
@@ -25,22 +26,24 @@ class Reminder {
     this.isEveningOn,
     this.isMorningOn,
     this.plantName,
+    this.createdAt,
   });
   factory Reminder.fromJson(Map<String, dynamic> json) {
     return Reminder(
-      dateType: DateType.values[json['date_type']],
-      eveningTime: json['evening_time'],
-      morningTime: json['morning_time'],
-      number: json['number'],
-      repeat: json['repeat'],
-      type: json['type'],
-      isEveningOn: json['is_evening_on'],
-      isMorningOn: json['is_morning_on'],
-      plantName: json['plant_name'],
-    );
+        dateType: DateType.values[json['date_type']],
+        eveningTime: json['evening_time'],
+        morningTime: json['morning_time'],
+        number: json['number'],
+        repeat: json['repeat'],
+        type: json['type'],
+        isEveningOn: json['is_evening_on'],
+        isMorningOn: json['is_morning_on'],
+        plantName: json['plant_name'],
+        createdAt: json['created_at']);
   }
   Map<String, dynamic> toMap() {
     return {
+      'created_at': DateTime.now().toIso8601String(),
       'date_type': dateType.index,
       'evening_time': eveningTime,
       'morning_time': morningTime,
